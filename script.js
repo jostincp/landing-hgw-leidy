@@ -3,26 +3,19 @@
 // ==========================================
 
 // Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // ==========================================
     // STICKY HEADER ON SCROLL
     // ==========================================
     const header = document.getElementById('header');
-    const floatingCta = document.getElementById('floatingCta');
-    
-    window.addEventListener('scroll', function() {
+
+
+    window.addEventListener('scroll', function () {
         if (window.scrollY > 100) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
-        }
-        
-        // Show floating CTA on mobile after scrolling past hero
-        if (window.scrollY > 600 && window.innerWidth < 768) {
-            floatingCta.classList.add('visible');
-        } else {
-            floatingCta.classList.remove('visible');
         }
     });
 
@@ -33,81 +26,81 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const dots = document.querySelectorAll('.dot');
-    
+
     let currentTestimonial = 0;
     const totalTestimonials = testimonialCards.length;
-    
+
     // Function to show specific testimonial
     function showTestimonial(index) {
         // Remove active class from all cards and dots
         testimonialCards.forEach(card => card.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
-        
+
         // Add active class to current card and dot
         testimonialCards[index].classList.add('active');
         dots[index].classList.add('active');
-        
+
         currentTestimonial = index;
     }
-    
+
     // Next testimonial
     function nextTestimonial() {
         let next = (currentTestimonial + 1) % totalTestimonials;
         showTestimonial(next);
     }
-    
+
     // Previous testimonial
     function prevTestimonial() {
         let prev = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
         showTestimonial(prev);
     }
-    
+
     // Event listeners for carousel buttons
     if (nextBtn) {
         nextBtn.addEventListener('click', nextTestimonial);
     }
-    
+
     if (prevBtn) {
         prevBtn.addEventListener('click', prevTestimonial);
     }
-    
+
     // Event listeners for dots
     dots.forEach((dot, index) => {
-        dot.addEventListener('click', function() {
+        dot.addEventListener('click', function () {
             showTestimonial(index);
         });
     });
-    
+
     // Auto-advance carousel every 5 seconds
     let autoAdvance = setInterval(nextTestimonial, 5000);
-    
+
     // Pause auto-advance on hover
     const carouselContainer = document.querySelector('.testimonial-carousel');
     if (carouselContainer) {
-        carouselContainer.addEventListener('mouseenter', function() {
+        carouselContainer.addEventListener('mouseenter', function () {
             clearInterval(autoAdvance);
         });
-        
-        carouselContainer.addEventListener('mouseleave', function() {
+
+        carouselContainer.addEventListener('mouseleave', function () {
             autoAdvance = setInterval(nextTestimonial, 5000);
         });
     }
-    
+
     // Touch/swipe support for mobile
     let touchStartX = 0;
     let touchEndX = 0;
-    
+
     if (carouselContainer) {
-        carouselContainer.addEventListener('touchstart', function(e) {
+        carouselContainer.addEventListener('touchstart', function (e) {
             touchStartX = e.changedTouches[0].screenX;
         });
-        
-        carouselContainer.addEventListener('touchend', function(e) {
+
+        carouselContainer.addEventListener('touchend', function (e) {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
         });
     }
-    
+
     function handleSwipe() {
         const swipeThreshold = 50;
         if (touchEndX < touchStartX - swipeThreshold) {
@@ -124,20 +117,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // SCROLL ANIMATIONS (Intersection Observer)
     // ==========================================
     const fadeElements = document.querySelectorAll('.fade-in');
-    
+
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
-    const observer = new IntersectionObserver(function(entries) {
+
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
-    
+
     fadeElements.forEach(element => {
         observer.observe(element);
     });
@@ -146,25 +139,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // SMOOTH SCROLL FOR ANCHOR LINKS
     // ==========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            
+
             // Don't prevent default for #comprar links (they go to external site)
             if (href === '#comprar') {
                 return;
             }
-            
+
             if (href !== '#' && href !== '') {
                 e.preventDefault();
-                
+
                 const targetId = href.substring(1);
                 const targetElement = document.getElementById(targetId);
-                
+
                 if (targetElement) {
                     const headerOffset = 80;
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                    
+
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: 'smooth'
@@ -179,14 +172,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // (Ready for Facebook Pixel integration)
     // ==========================================
     const ctaButtons = document.querySelectorAll('.cta-btn');
-    
+
     ctaButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const buttonText = this.textContent.trim();
-            
+
             // Log click event (replace with Facebook Pixel event)
             console.log('CTA Clicked:', buttonText);
-            
+
             // Example Facebook Pixel event (uncomment when ready):
             // if (typeof fbq !== 'undefined') {
             //     fbq('track', 'AddToCart', {
@@ -203,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // BENEFIT CARDS SEQUENTIAL ANIMATION
     // ==========================================
     const benefitCards = document.querySelectorAll('.benefit-card');
-    
+
     benefitCards.forEach((card, index) => {
         // Add slight delay for each card
         card.style.transitionDelay = `${index * 0.05}s`;
@@ -214,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     const currentYear = new Date().getFullYear();
     const yearElements = document.querySelectorAll('.current-year');
-    
+
     yearElements.forEach(element => {
         element.textContent = currentYear;
     });
@@ -243,29 +236,29 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================
     // ANALYTICS & TRACKING HELPERS
     // ==========================================
-    
+
     // Track time on page
     let timeOnPage = 0;
-    setInterval(function() {
+    setInterval(function () {
         timeOnPage += 1;
         // Every 30 seconds, log engagement (can send to analytics)
         if (timeOnPage % 30 === 0) {
             console.log('User engaged for', timeOnPage, 'seconds');
         }
     }, 1000);
-    
+
     // Track scroll depth
     let maxScrollDepth = 0;
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         const scrollPercentage = (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100;
-        
+
         if (scrollPercentage > maxScrollDepth) {
             maxScrollDepth = Math.round(scrollPercentage);
-            
+
             // Log significant scroll milestones
             if (maxScrollDepth === 25 || maxScrollDepth === 50 || maxScrollDepth === 75 || maxScrollDepth === 100) {
                 console.log('Scroll depth:', maxScrollDepth + '%');
-                
+
                 // Example: Send to Facebook Pixel or Google Analytics
                 // fbq('trackCustom', 'ScrollDepth', { depth: maxScrollDepth });
             }
