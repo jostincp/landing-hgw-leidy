@@ -14,7 +14,7 @@ jobs:
       - name: Obtener el código más reciente
         uses: actions/checkout@v4
 
-      # Paso B (¡NUEVO!): Borramos las carpetas ocultas para que no viajen al servidor
+      # Paso B (¡NUEVO!): Borramos las carpetas ocultas para que no viajen al servidor.
       - name: Limpiar archivos del sistema
         run: rm -rf .git .github
 
