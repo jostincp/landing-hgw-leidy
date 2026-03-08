@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="20" fill="#2D8659"/>
+  <!-- Leaf shape -->
+  <path d="M50 15 C50 15 20 35 20 58 C20 72 32 82 50 85 C68 82 80 72 80 58 C80 35 50 15 50 15 Z" fill="#ffffff"/>
+  <!-- Stem -->
+  <line x1="50" y1="85" x2="50" y2="70" stroke="#2D8659" stroke-width="4" stroke-linecap="round"/>
+  <!-- Leaf vein -->
+  <path d="M50 25 Q50 55 50 80" stroke="#2D8659" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M50 45 Q38 50 30 58" stroke="#2D8659" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M50 45 Q62 50 70 58" stroke="#2D8659" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>

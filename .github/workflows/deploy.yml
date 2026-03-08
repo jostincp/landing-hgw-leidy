@@ -1,0 +1,31 @@
+name: Desplegar Landing Page a Oracle VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso A: Descarga el código
+      - name: Obtener el código más reciente
+        uses: actions/checkout@v4
+
+      # Paso B (¡NUEVO!): Borramos las carpetas ocultas para que no viajen al servidor
+      - name: Limpiar archivos del sistema
+        run: rm -rf .git .github
+
+      # Paso C: Copia limpia al VPS
+      - name: Copiar archivos al VPS vía SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "."
+          target: "/home/ubuntu/solutionshub/landing-leidy"
+          strip_components: 1
+          overwrite: true

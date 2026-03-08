@@ -9,13 +9,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // STICKY HEADER ON SCROLL
     // ==========================================
     const header = document.getElementById('header');
-
+    const floatingCta = document.getElementById('floatingCta');
 
     window.addEventListener('scroll', function () {
         if (window.scrollY > 100) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+        }
+
+        // Show floating CTA on mobile after scrolling past hero
+        if (window.scrollY > 600 && window.innerWidth < 768) {
+            floatingCta.classList.add('visible');
+        } else {
+            floatingCta.classList.remove('visible');
         }
     });
 
@@ -141,6 +148,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
+
+            // Bail out if the href was dynamically changed to an external URL
+            if (!href || !href.startsWith('#')) return;
 
             // Don't prevent default for #comprar links (they go to external site)
             if (href === '#comprar') {
@@ -271,7 +281,69 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('%c🦷 HGW Landing Page Loaded Successfully! ', 'background: #2D8659; color: white; font-size: 16px; padding: 10px; border-radius: 5px;');
     console.log('%cReady for Facebook Pixel integration', 'color: #4ECDC4; font-size: 12px;');
 
+    // ==========================================
+    // VIDEO MODAL - Abrir al clic en Comprar
+    // ==========================================
+    const VIDEO_URL = '';
+    const STORE_URL = 'https://www.healthgreenworld.com/?userName=TOGETHER';
+
+    const videoModal = document.getElementById('videoModal');
+    const closeModalBtn = document.getElementById('closeModal');
+    const modalIframe = document.getElementById('modalVideoIframe');
+    const modalCtaBtn = document.getElementById('modalCtaBtn');
+    const modalSkipLink = document.getElementById('modalSkipLink');
+
+    function openModal() {
+        modalCtaBtn.href = STORE_URL;
+        modalIframe.src = VIDEO_URL + '?autoplay=1&rel=0';
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scroll
+    }
+
+    function closeModal() {
+        videoModal.classList.remove('active');
+        modalIframe.src = ''; // Stop video playback
+        document.body.style.overflow = '';
+    }
+
+    // Open modal when clicking any "Comprar ahora" button
+    document.querySelectorAll('.open-video-modal').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            openModal();
+        });
+    });
+
+    // Close with X button
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    // Close when clicking outside the modal box
+    if (videoModal) {
+        videoModal.addEventListener('click', function (e) {
+            if (e.target === videoModal) closeModal();
+        });
+    }
+
+    // "Omitir video e ir directo" link
+    if (modalSkipLink) {
+        modalSkipLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            closeModal();
+            window.open(STORE_URL, '_blank', 'noopener,noreferrer');
+        });
+    }
+
+    // Close with Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
 });
+
 
 // ==========================================
 // HELPER FUNCTIONS

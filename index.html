@@ -20,8 +20,11 @@
         content="Pasta dental con hierbas chinas tradicionales. Previene caries, fortalece encías y blanquea naturalmente. ¡30% de descuento!">
     <meta property="og:image" content="./contenido-multimedia/imagen2png.png">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css?v=1.0">
+    <link rel="stylesheet" href="styles.css?v=2.0">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,10 +47,11 @@
                 <span>HGW Herbs</span>
             </div>
             <div class="nav-ctas">
-                <!--Link de la pagin HGW-->
-                <a href="https://www.healthgreenworld.com/?userName=TOGETHER" target="_blank" rel="noopener noreferrer"
-                    class="btn btn-primary cta-btn">Comprar ahora</a>
-
+                <!--Link HGW-->
+                <a href="#" data-href="https://www.healthgreenworld.com/?userName=TOGETHER"
+                    class="btn btn-primary cta-btn open-video-modal">Comprar ahora</a>
+                <a href="https://wa.me/message/LLT4FS67VK34L1" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-accent cta-btn"><i class="fab fa-whatsapp"></i> ¡Habla con un Experto!</a>
             </div>
         </nav>
     </header>
@@ -80,15 +84,13 @@
                         </span>
                     </div>
                     <div style="margin-top: 2rem;">
-                        <!--Link de la pagin GHW-->
-                        <a href="https://www.healthgreenworld.com/?userName=TOGETHER" target="_blank"
-                            rel="noopener noreferrer" class="btn btn-primary btn-large cta-btn">
+                        <a href="#" data-href="https://www.healthgreenworld.com/?userName=TOGETHER"
+                            class="btn btn-primary btn-large cta-btn open-video-modal">
                             <i class="fas fa-shopping-cart"></i> Comprar Ahora
                         </a>
                     </div>
                 </div>
                 <div class="hero-image fade-in">
-                    <!--Aquí va el del chat de WhatsApp-->
                     <img src="./contenido-multimedia/imagen1.webp"
                         alt="Mujer sonriente con pasta dental HGW Fresh Mint">
                 </div>
@@ -348,7 +350,10 @@
                         </li>
                     </ul>
                     <div style="margin-top: 2rem;">
-
+                        <a href="https://wa.me/message/LLT4FS67VK34L1" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-accent btn-large cta-btn">
+                            <i class="fab fa-whatsapp"></i> ¡Quiero Asesoría de un Experto!
+                        </a>
                     </div>
                 </div>
             </div>
@@ -470,31 +475,17 @@
                 </p>
             </div>
 
-            <div class="video-wrapper fade-in">
-                <!-- PLACEHOLDER - Replace with actual video embed -->
-                <div class="video-placeholder">
-                    <i class="fas fa-play-circle"></i>
-                    <p style="font-size: 1.25rem; margin-top: 1rem;">
-                        Video Tutorial<br>
-                        <span style="font-size: 0.875rem; opacity: 0.7;">
-                            (Coloca aquí tu video de YouTube o Vimeo)
-                        </span>
-                    </p>
-                </div>
-                <!-- EXAMPLE: Uncomment and add your video URL
-                <iframe 
-                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
-                    title="Tutorial de registro HGW"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            <div class="video-wrapper vertical fade-in">
+                <iframe width="560" height="315" src=""
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen>
                 </iframe>
-                -->
             </div>
 
             <div class="text-center" style="margin-top: 2rem;">
-                <!--Link de la pagin HGW-->
-                <a href="https://www.healthgreenworld.com/?userName=TOGETHER" target="_blank" rel="noopener noreferrer"
-                    class="btn btn-primary btn-large cta-btn">
+                <a href="#" data-href="https://www.healthgreenworld.com/?userName=TOGETHER"
+                    class="btn btn-primary btn-large cta-btn open-video-modal">
                     Quiero Empezar Ahora
                 </a>
             </div>
@@ -512,12 +503,14 @@
                     Protección natural, resultados profesionales.
                 </p>
                 <div class="cta-buttons">
-                    <!--Link de la pagin HGW-->
-                    <a href="https://www.healthgreenworld.com/?userName=TOGETHER" target="_blank"
-                        rel="noopener noreferrer" class="btn btn-primary btn-large cta-btn">
+                    <a href="#" data-href="https://www.healthgreenworld.com/?userName=TOGETHER"
+                        class="btn btn-primary btn-large cta-btn open-video-modal">
                         <i class="fas fa-shopping-cart"></i> Comprar Ahora
                     </a>
-
+                    <a href="https://wa.me/message/LLT4FS67VK34L1" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-accent btn-large cta-btn">
+                        <i class="fab fa-whatsapp"></i> ¡Habla con un Experto y Ahorra!
+                    </a>
                 </div>
                 <p style="font-size: 0.875rem; margin-top: 1.5rem; opacity: 0.9;">
                     <i class="fas fa-lock"></i> Compra 100% segura |
@@ -549,10 +542,37 @@
         </div>
     </footer>
 
+    <!-- FLOATING CTA (Mobile) -->
+    <div class="floating-cta" id="floatingCta">
+        <a href="https://wa.me/message/LLT4FS67VK34L1" target="_blank" rel="noopener noreferrer"
+            class="btn btn-accent cta-btn">
+            <i class="fab fa-whatsapp"></i> Asesoría
+        </a>
+    </div>
 
+    <!-- VIDEO MODAL -->
+    <div class="video-modal-overlay" id="videoModal">
+        <div class="video-modal">
+            <button class="close-modal-btn" id="closeModal" aria-label="Cerrar">&times;</button>
+            <h3><i class="fas fa-play-circle" style="color: var(--primary-green);"></i> Mira cómo comprar paso a paso
+            </h3>
+            <div class="video-wrapper vertical">
+                <iframe id="modalVideoIframe" src="" title="Tutorial de compra HGW" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <a id="modalCtaBtn" href="#" target="_blank" rel="noopener noreferrer" class="modal-cta-btn">
+                <i class="fas fa-shopping-cart"></i> Ir a la Tienda &rarr;
+            </a>
+            <p class="modal-skip-text">
+                <a href="#" id="modalSkipLink">Omitir video e ir directo</a>
+            </p>
+        </div>
+    </div>
 
     <!-- JavaScript -->
-    <script src="script.js"></script>
+    <script src="script.js?v=2.0"></script>
 
 </body>
 
